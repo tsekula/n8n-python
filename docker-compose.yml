@@ -1,0 +1,23 @@
+services:
+  n8n:
+    image: 'naskio/n8n-python:latest'
+    restart: always
+    ports:
+      - '5678:5678'
+    environment:
+      - 'N8N_HOST=${N8N_SUBDOMAIN}.${DOMAIN_NAME}'
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+      - NODE_ENV=production
+      - 'WEBHOOK_URL=https://${N8N_SUBDOMAIN}.${DOMAIN_NAME}/'
+      - 'GENERIC_TIMEZONE=${GENERIC_TIMEZONE}'
+    volumes:
+      - 'n8n_data:/home/node/.n8n'
+      - './local_files:/data/files'
+      - './python_scripts:/data/py_scripts'
+      - './requirements.txt:/data/requirements.txt'
+volumes:
+  n8n_data:
+    external: true
+  files_volume: null
