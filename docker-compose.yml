@@ -17,6 +17,7 @@ services:
       - './local_files:/data/files'
       - './python_scripts:/data/py_scripts'
       - './requirements.txt:/data/requirements.txt'
+      - './post-deployment.sh:/post-deployment.sh'
 volumes:
   n8n_data:
     external: true
